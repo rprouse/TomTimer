@@ -23,36 +23,33 @@
 // **********************************************************************************
 namespace Alteridem.TomTimer.Common
 {
-    public class Settings
+    public class IntervalTimer
     {
-        public Settings()
+        
+        /// <summary>
+        /// The current run mode of the timer
+        /// </summary>
+        public Mode Mode { get; set; }
+
+        public void Reset()
         {
-            // Some default values until I get
-            // around to persisting these
-            PomodoroMinutes = 25;
-            ShortBreakMinutes = 5;
-            LongBreakMinutes = 15;
-            PomodorosPerLongBreak = 4;
+            
         }
 
-        /// <summary>
-        /// The length in minutes of a Pomodoro
-        /// </summary>
-        public int PomodoroMinutes { get; set; }
+        public void Reset( Mode mode )
+        {
+            Mode = mode;
+            Reset();
+        }
 
-        /// <summary>
-        /// The length in minutes of a short break
-        /// </summary>
-        public int ShortBreakMinutes { get; set; }
+        public void Start()
+        {
+            
+        }
 
-        /// <summary>
-        /// The length in minutes of a long break
-        /// </summary>
-        public int LongBreakMinutes { get; set; }
-
-        /// <summary>
-        /// The number of Pomodoros until you get a long break
-        /// </summary>
-        public int PomodorosPerLongBreak { get; set; }
+        public void Pause()
+        {
+            
+        }
     }
 }

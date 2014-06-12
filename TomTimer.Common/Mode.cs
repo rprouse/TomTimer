@@ -21,38 +21,16 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 // 
 // **********************************************************************************
+
 namespace Alteridem.TomTimer.Common
 {
-    public class Settings
+    /// <summary>
+    /// The current mode of the timer
+    /// </summary>
+    public enum Mode
     {
-        public Settings()
-        {
-            // Some default values until I get
-            // around to persisting these
-            PomodoroMinutes = 25;
-            ShortBreakMinutes = 5;
-            LongBreakMinutes = 15;
-            PomodorosPerLongBreak = 4;
-        }
-
-        /// <summary>
-        /// The length in minutes of a Pomodoro
-        /// </summary>
-        public int PomodoroMinutes { get; set; }
-
-        /// <summary>
-        /// The length in minutes of a short break
-        /// </summary>
-        public int ShortBreakMinutes { get; set; }
-
-        /// <summary>
-        /// The length in minutes of a long break
-        /// </summary>
-        public int LongBreakMinutes { get; set; }
-
-        /// <summary>
-        /// The number of Pomodoros until you get a long break
-        /// </summary>
-        public int PomodorosPerLongBreak { get; set; }
+        Pomodoro,
+        ShortBreak,
+        LongBreak
     }
 }

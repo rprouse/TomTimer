@@ -24,7 +24,8 @@
 
 #region Using Directives
 
-using System;
+using System.Threading.Tasks;
+using Alteridem.TomTimer.Common;
 using NUnit.Framework;
 
 #endregion
@@ -35,9 +36,58 @@ namespace Alteridem.TomTimer.Test
     public class TimerTest
     {
         [Test]
-        public void TestMethod()
+        public async Task TestTimerDueTime()
         {
+            var counter = new CallCounter();
+            using(new Timer(TimerCallback, counter, 100, 10000))
+            {
+                await Task.Delay( 300 );
+            }
+            Assert.That( counter.Count, Is.EqualTo( 1 ) );
+        }
 
+        [Test]
+        public async Task TestTimerPeriod()
+        {
+            var counter = new CallCounter();
+            using(new Timer(TimerCallback, counter, 100, 100))
+            {
+                await Task.Delay(350);
+            }
+            Assert.That(counter.Count, Is.EqualTo(3));
+        }
+
+        [Test]
+        public async Task TestCancelTimer()
+        {
+            var counter = new CallCounter();
+            using(var timer = new Timer(TimerCallback, counter, 100, 100))
+            {
+                timer.Cancel();
+                await Task.Delay(200);
+            }
+            Assert.That(counter.Count, Is.EqualTo(0));
+        }
+
+        private void TimerCallback(object state)
+        {
+            var counter = state as CallCounter;
+            if(counter != null) counter.Increment();
+        }
+
+        private class CallCounter
+        {
+            public CallCounter()
+            {
+                Count = 0;
+            }
+
+            public int Count { get; private set; }
+
+            public void Increment()
+            {
+                Count++;
+            }
         }
     }
 }
